@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JS Learning Lab & Learn JavaScript</title>
+
+<style>:root {
+    --bg: #f4f7f6;
+    --surface: #ffffff;
+    --text: #202b2a;
+    --muted: #71817e;
+    --primary: #168578;
+    --primary-light: #e3f3ef;
+    --border: #dce7e4;
+    --code: #171923;
+    --success: #159b68;
+    --shadow: 0 8px 25px rgba(30, 70, 65, 0.07);
+}
+
+body.dark {
+    --bg: #121b1a;
+    --surface: #1c2927;
+    --text: #f1f6f4;
+    --muted: #a4b5b0;
+    --primary: #55c5ad;
+    --primary-light: #253e39;
+    --border: #354944;
+    --code: #10121b;
+    --success: #52d6a1;
+    --shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    transition: background 0.2s, color 0.2s;
+}
+
+button, input, select, textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar {
+    max-width: 1250px;
+    margin: auto;
+    padding: 15px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo {
+    font-size: 21px;
+    font-weight: bold;
+    color: var(--primary);
+}
+
+.logo span {
+    color: var(--text);
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.theme-btn, .nav-btn {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    padding: 9px 13px;
+    border-radius: 9px;
+}
+
+.hero {
+    max-width: 1250px;
+    margin: 35px auto 25px;
+    padding: 0 22px;
+}
+
+.hero-box {
+    background: linear-gradient(120deg, #0a9e8a, #155856);
+    color: white;
+    padding: 38px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+}
+
+.hero h1 {
+    font-size: clamp(27px, 4vw, 42px);
+    margin-bottom: 10px;
+}
+
+.hero p {
+    max-width: 620px;
+    opacity: 0.9;
+}
+
+.hero-tag {
+    border: 1px solid rgba(255,255,255,0.45);
+    padding: 12px 18px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.progress-section {
+    max-width: 1250px;
+    margin: 0 auto 25px;
+    padding: 0 22px;
+}
+
+.progress-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 13px;
+    box-shadow: var(--shadow);
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.progress-track {
+    height: 9px;
+    background: var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--success);
+    transition: width 0.3s;
+}
+
+.container {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 22px 50px;
+}
+
+.tabs {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 10px 17px;
+    border-radius: 9px;
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.panel {
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 270px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+.sidebar, .content-card, .quiz-card, .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 13px;
+    box-shadow: var(--shadow);
+}
+
+.sidebar {
+    padding: 16px;
+    position: sticky;
+    top: 85px;
+}
+
+.sidebar h3 {
+    margin-bottom: 12px;
+}
+
+.filters {
+    display: grid;
+    gap: 9px;
+    margin-bottom: 15px;
+}
+
+.filters input, .filters select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+}
+
+.topic-list {
+    display: grid;
+    gap: 6px;
+    max-height: 480px;
+    overflow-y: auto;
+}
+
+.topic-item {
+    text-align: left;
+    border: none;
+    background: transparent;
+    color: var(--text);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.topic-item:hover, .topic-item.active {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.topic-item small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.content-card {
+    padding: 25px;
+    min-width: 0;
+}
+
+.topic-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: flex-start;
+    margin-bottom: 18px;
+}
+
+.topic-heading h2 {
+    font-size: 27px;
+}
+
+.level-badge {
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.section-title {
+    font-size: 17px;
+    margin: 22px 0 9px;
+}
+
+.topic-description {
+    color: var(--muted);
+}
+
+.concept-list {
+    padding-left: 20px;
+}
+
+.concept-list li {
+    margin: 6px 0;
+}
+
+.code-box {
+    background: var(--code);
+    color: #e8e9f3;
+    border-radius: 10px;
+    padding: 17px;
+    overflow-x: auto;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    white-space: pre;
+}
+
+.editor {
+    width: 100%;
+    min-height: 170px;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--code);
+    color: #e8e9f3;
+    font-family: Consolas, monospace;
+    font-size: 14px;
+    resize: vertical;
+    outline: none;
+}
+
+.primary-btn, .secondary-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-top: 10px;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.secondary-btn {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.output {
+    min-height: 55px;
+    margin-top: 10px;
+    padding: 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    font-family: Consolas, monospace;
+    font-size: 13px;
+}
+
+.practice-box {
+    background: var(--primary-light);
+    padding: 16px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.complete-btn {
+    background: var(--success);
+    color: white;
+    border: none;
+    padding: 11px 16px;
+    border-radius: 8px;
+    margin-top: 18px;
+}
+
+.quiz-card {
+    padding: 25px;
+    max-width: 750px;
+    margin: auto;
+}
+
+.quiz-option {
+    display: block;
+    width: 100%;
+    text-align: left;
+    background: var(--bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 12px;
+    margin: 9px 0;
+}
+
+.quiz-option.selected {
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.quiz-feedback {
+    margin-top: 12px;
+    font-weight: bold;
+}
+
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.project-card {
+    padding: 22px;
+}
+
+.project-card h3 {
+    margin-bottom: 8px;
+}
+
+.project-card p {
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+.counter-number {
+    font-size: 42px;
+    font-weight: bold;
+    text-align: center;
+    margin: 15px;
+}
+
+.project-controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.project-controls button {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 9px 13px;
+    border-radius: 7px;
+}
+
+.project-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text);
+    border-radius: 8px;
+    margin: 6px 0;
+}
+
+.todo-list {
+    list-style: none;
+    margin-top: 12px;
+}
+
+.todo-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px;
+    border-bottom: 1px solid var(--border);
+}
+
+.todo-list button {
+    background: #d94b4b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 8px;
+}
+
+footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 25px 20px;
+    text-align: center;
+    color: var(--muted);
+}
+
+footer strong {
+    color: var(--primary);
+}
+
+@media (max-width: 800px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .topic-list {
+        max-height: 200px;
+    }
+
+    .hero-box {
+        display: block;
+        padding: 28px;
+    }
+
+    .hero-tag {
+        display: inline-block;
+        margin-top: 18px;
+    }
+}
+
+@media (max-width: 550px) {
+    .navbar {
+        padding: 12px;
+    }
+
+    .logo {
+        font-size: 17px;
+    }
+
+    .hero, .progress-section, .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .content-card {
+        padding: 17px;
+    }
+
+    .project-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .topic-heading h2 {
+        font-size: 22px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <nav class="navbar">
+        <div class="logo">JS <span>Learning Lab</span></div>
+        <div class="nav-actions">
+            <button class="theme-btn" id="themeButton">☾ Dark</button>
+        </div>
+    </nav>
+</header>
+
+<section class="hero">
+    <div class="hero-box">
+        <div>
+            <h1>Learn JavaScript. Build Real Skills.</h1>
+            <p>
+                A practical learning space to understand JavaScript concepts,
+                write code, solve questions, and build mini projects.
+            </p>
+        </div>
+        <div class="hero-tag">Learn · Practice · Build</div>
+    </div>
+</section>
+
+<section class="progress-section">
+    <div class="progress-card">
+        <div class="progress-info">
+            <strong>Your learning progress</strong>
+            <span id="progressText">0 / 12 completed</span>
+        </div>
+        <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+    </div>
+</section>
+
+<main class="container">
+
+    <div class="tabs">
+        <button class="tab-btn active" data-panel="learnPanel">Learn Topics</button>
+        <button class="tab-btn" data-panel="quizPanel">Practice Quiz</button>
+        <button class="tab-btn" data-panel="projectsPanel">Mini Projects</button>
+    </div>
+
+    <!-- LEARNING PANEL -->
+    <section class="panel active" id="learnPanel">
+        <div class="layout">
+
+            <aside class="sidebar">
+                <h3>JavaScript Topics</h3>
+
+                <div class="filters">
+                    <input type="text" id="searchInput" placeholder="Search topics...">
+
+                    <select id="levelFilter">
+                        <option value="All">All Levels</option>
+                        <option value="Beginner">Beginner</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Advanced">Advanced</option>
+                    </select>
+                </div>
+
+                <div class="topic-list" id="topicList"></div>
+            </aside>
+
+            <article class="content-card">
+                <div class="topic-heading">
+                    <div>
+                        <h2 id="topicTitle">Variables</h2>
+                        <p class="topic-description" id="topicDescription"></p>
+                    </div>
+                    <span class="level-badge" id="topicLevel">Beginner</span>
+                </div>
+
+                <h3 class="section-title">Key Concepts</h3>
+                <ul class="concept-list" id="topicConcepts"></ul>
+
+                <h3 class="section-title">Example</h3>
+                <pre class="code-box" id="topicExample"></pre>
+
+                <h3 class="section-title">Try it yourself</h3>
+                <p class="topic-description">
+                    Edit the code below and click Run Code to see the output.
+                </p>
+
+                <textarea class="editor" id="codeEditor" spellcheck="false"></textarea>
+                <button class="primary-btn" id="runButton">▶ Run Code</button>
+                <div class="output" id="codeOutput">Output will appear here...</div>
+
+                <div class="practice-box">
+                    <strong>Practice Challenge</strong>
+                    <p id="practiceQuestion"></p>
+                </div>
+
+                <button class="complete-btn" id="completeButton">
+                    Mark as Completed ✓
+                </button>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- QUIZ PANEL -->
+    <section class="panel" id="quizPanel">
+        <div class="quiz-card">
+            <h2>JavaScript Knowledge Check</h2>
+            <p class="topic-description" id="quizProgress">Question 1 of 10</p>
+
+            <h3 id="quizQuestion" style="margin-top:20px;"></h3>
+            <div id="quizOptions"></div>
+            <div class="quiz-feedback" id="quizFeedback"></div>
+
+            <button class="primary-btn" id="checkAnswerButton">Check Answer</button>
+            <button class="secondary-btn" id="nextQuestionButton" style="display:none;">
+                Next Question →
+            </button>
+            <button class="secondary-btn" id="restartQuizButton" style="display:none;">
+                Try Again
+            </button>
+        </div>
+    </section>
+
+    <!-- PROJECTS PANEL -->
+    <section class="panel" id="projectsPanel">
+        <h2 style="margin-bottom:18px;">Build Mini Projects</h2>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+                <h3>01. Counter App</h3>
+                <p>Practice variables, functions, and click events.</p>
+
+                <div class="counter-number" id="counterValue">0</div>
+
+                <div class="project-controls">
+                    <button id="decreaseButton">− Decrease</button>
+                    <button id="resetButton">Reset</button>
+                    <button id="increaseButton">+ Increase</button>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <h3>02. Simple Calculator</h3>
+                <p>Practice input values, operators, and conditions.</p>
+
+                <input class="project-input" type="number" id="firstNumber" placeholder="First number">
+                <input class="project-input" type="number" id="secondNumber" placeholder="Second number">
+
+                <div class="project-controls">
+                    <button data-operation="add">+</button>
+                    <button data-operation="subtract">−</button>
+                    <button data-operation="multiply">×</button>
+                    <button data-operation="divide">÷</button>
+                </div>
+
+                <p id="calculatorResult" style="margin-top:12px;">Result: —</p>
+            </div>
+
+            <div class="project-card">
+                <h3>03. To-do List</h3>
+                <p>Practice arrays, DOM manipulation, and events.</p>
+
+                <input class="project-input" id="todoInput" placeholder="Enter a task">
+                <button class="primary-btn" id="addTodoButton">Add Task</button>
+                <ul class="todo-list" id="todoList"></ul>
+            </div>
+
+            <div class="project-card">
+                <h3>04. Live Character Counter</h3>
+                <p>Practice events and reading input values.</p>
+
+                <textarea class="project-input" id="characterInput" rows="4"
+                    placeholder="Start typing something..."></textarea>
+                <p>Characters: <strong id="characterCount">0</strong></p>
+                <p>Words: <strong id="wordCount">0</strong></p>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<footer>
+    <p><strong>JS Learning Lab</strong> — Learn JavaScript by doing.</p>
+    <p>Designed and developed by Nivetha T. | <span id="currentYear"></span></p>
+</footer>
+
+<script>
+/* TOPIC DATA */
+
+const topics = [
+    {
+        title: "Variables",
+        level: "Beginner",
+        description: "Variables are containers used to store data in JavaScript.",
+        concepts: [
+            "let: used when a value may change.",
+            "const: used when a variable should not be reassigned.",
+            "var: older way of declaring variables.",
+            "Use meaningful names for variables."
+        ],
+        example: `let studentName = "Nivetha";
+const age = 21;
+
+console.log(studentName);
+console.log(age);`,
+        practice: "Create a variable called city and store your city name in it.",
+        code: `let city = "Coimbatore";
+console.log(city);`
+    },
+    {
+        title: "Data Types",
+        level: "Beginner",
+        description: "Data types describe the kind of value stored in a variable.",
+        concepts: [
+            "String: text values.",
+            "Number: integer and decimal values.",
+            "Boolean: true or false.",
+            "Undefined: a declared variable without a value.",
+            "Null: intentionally empty value.",
+            "Object: collection of related data."
+        ],
+        example: `let name = "Nivetha";
+let mark = 85;
+let isStudent = true;
+
+console.log(typeof name);
+console.log(typeof mark);
+console.log(typeof isStudent);`,
+        practice: "Create one string, one number, and one boolean variable.",
+        code: `let course = "CSE";
+let year = 4;
+let isLearning = true;
+
+console.log(typeof course);
+console.log(typeof year);
+console.log(typeof isLearning);`
+    },
+    {
+        title: "Operators",
+        level: "Beginner",
+        description: "Operators perform operations on values and variables.",
+        concepts: [
+            "Arithmetic: +, -, *, /, %, **.",
+            "Assignment: =, +=, -=, *=.",
+            "Comparison: ==, ===, !=, !==, >, <.",
+            "Logical: &&, ||, !.",
+            "Ternary operator: short form of if...else."
+        ],
+        example: `let a = 10;
+let b = 3;
+
+console.log(a + b);
+console.log(a % b);
+console.log(a > b);
+console.log(a === 10);`,
+        practice: "Find the remainder when 25 is divided by 4.",
+        code: `let number = 25;
+console.log(number % 4);`
+    },
+    {
+        title: "Conditions",
+        level: "Beginner",
+        description: "Conditions help a program make decisions.",
+        concepts: [
+            "if runs code when a condition is true.",
+            "else runs when the if condition is false.",
+            "else if checks another condition.",
+            "switch is useful when comparing one value with multiple cases.",
+            "Use === for strict comparison."
+        ],
+        example: `let mark = 75;
+
+if (mark >= 90) {
+    console.log("Grade A");
+} else if (mark >= 70) {
+    console.log("Grade B");
+} else {
+    console.log("Needs improvement");
+}`,
+        practice: "Check whether a number is positive, negative, or zero.",
+        code: `let number = -5;
+
+if (number > 0) {
+    console.log("Positive");
+} else if (number < 0) {
+    console.log("Negative");
+} else {
+    console.log("Zero");
+}`
+    },
+    {
+        title: "Loops",
+        level: "Beginner",
+        description: "Loops execute a block of code repeatedly.",
+        concepts: [
+            "for loop is useful when the number of repetitions is known.",
+            "while loop repeats while a condition is true.",
+            "do...while executes at least once.",
+            "break stops a loop.",
+            "continue skips the current iteration."
+        ],
+        example: `for (let i = 1; i <= 5; i++) {
+    console.log(i);
+}`,
+        practice: "Print numbers from 1 to 10 using a for loop.",
+        code: `for (let i = 1; i <= 10; i++) {
+    console.log(i);
+}`
+    },
+    {
+        title: "Functions",
+        level: "Beginner",
+        description: "Functions are reusable blocks of code that perform a specific task.",
+        concepts: [
+            "A function is defined using the function keyword.",
+            "Parameters receive input values.",
+            "Arguments are the actual values passed to a function.",
+            "return sends a value back from a function.",
+            "Arrow functions provide a shorter function syntax."
+        ],
+        example: `function add(a, b) {
+    return a + b;
+}
+
+let result = add(10, 20);
+console.log(result);`,
+        practice: "Create a function that accepts two numbers and returns their product.",
+        code: `function multiply(a, b) {
+    return a * b;
+}
+
+console.log(multiply(4, 5));`
+    },
+    {
+        title: "Arrays",
+        level: "Intermediate",
+        description: "Arrays store multiple values in a single variable.",
+        concepts: [
+            "Array indexes start from 0.",
+            "length returns the number of elements.",
+            "push() adds an element at the end.",
+            "pop() removes the last element.",
+            "map() creates a new array by transforming elements.",
+            "filter() creates an array containing matching elements."
+        ],
+        example: `let marks = [70, 80, 90];
+
+marks.push(95);
+
+let doubled = marks.map(mark => mark * 2);
+
+console.log(marks);
+console.log(doubled);`,
+        practice: "Use filter() to get numbers greater than 10.",
+        code: `let numbers = [5, 12, 8, 20, 3];
+
+let result = numbers.filter(num => num > 10);
+
+console.log(result);`
+    },
+    {
+        title: "Objects",
+        level: "Intermediate",
+        description: "Objects store related information using key-value pairs.",
+        concepts: [
+            "Properties contain key-value pairs.",
+            "Access properties using dot notation or bracket notation.",
+            "Methods are functions stored inside objects.",
+            "Objects can contain arrays and other objects."
+        ],
+        example: `const student = {
+    name: "Nivetha",
+    course: "CSE",
+    year: 4
+};
+
+console.log(student.name);
+console.log(student["course"]);`,
+        practice: "Create an object for a book with title, author, and price.",
+        code: `const book = {
+    title: "JavaScript Basics",
+    author: "Alex",
+    price: 299
+};
+
+console.log(book.title);
+console.log(book.price);`
+    },
+    {
+        title: "DOM Manipulation",
+        level: "Intermediate",
+        description: "The DOM allows JavaScript to access and change HTML elements.",
+        concepts: [
+            "DOM stands for Document Object Model.",
+            "getElementById() selects an element using its ID.",
+            "querySelector() selects the first matching CSS selector.",
+            "textContent changes text content.",
+            "innerHTML can insert HTML content; use carefully."
+        ],
+        example: `// Select an HTML element
+const heading = document.getElementById("title");
+
+// Change its text
+heading.textContent = "Welcome!";`,
+        practice: "Select an element with ID message and change its text.",
+        code: `// This example is shown as a concept.
+// In a webpage, select an element like this:
+
+const message = document.getElementById("message");
+
+if (message) {
+    message.textContent = "Hello JavaScript!";
+}
+
+console.log("DOM selection example");`
+    },
+    {
+        title: "Events",
+        level: "Intermediate",
+        description: "Events allow JavaScript to respond to user actions.",
+        concepts: [
+            "click event runs when an element is clicked.",
+            "input event runs when the input value changes.",
+            "submit event runs when a form is submitted.",
+            "addEventListener() attaches an event handler.",
+            "Event handlers make web pages interactive."
+        ],
+        example: `// Example for a webpage:
+const button = document.querySelector("#myButton");
+
+button.addEventListener("click", function() {
+    console.log("Button clicked!");
+});`,
+        practice: "Write an event listener that prints a message when a button is clicked.",
+        code: `// Concept example:
+function handleClick() {
+    console.log("Button clicked!");
+}
+
+handleClick();`
+    },
+    {
+        title: "Destructuring",
+        level: "Advanced",
+        description: "Destructuring extracts values from arrays or properties from objects.",
+        concepts: [
+            "Array destructuring uses square brackets.",
+            "Object destructuring uses curly braces.",
+            "It makes code shorter and easier to read.",
+            "Default values can be assigned during destructuring."
+        ],
+        example: `const student = {
+    name: "Nivetha",
+    course: "CSE"
+};
+
+const { name, course } = student;
+
+console.log(name);
+console.log(course);`,
+        practice: "Extract the first two values from an array using destructuring.",
+        code: `const colors = ["Red", "Blue", "Green"];
+
+const [first, second] = colors;
+
+console.log(first);
+console.log(second);`
+    },
+    {
+        title: "Promises and Async/Await",
+        level: "Advanced",
+        description: "Promises and async/await help manage asynchronous operations.",
+        concepts: [
+            "A Promise represents a future result.",
+            "Promise states are pending, fulfilled, and rejected.",
+            "then() handles a successful result.",
+            "catch() handles errors.",
+            "async functions return promises.",
+            "await pauses inside an async function until a promise settles."
+        ],
+        example: `function getData() {
+    return Promise.resolve("Data received");
+}
+
+async function showData() {
+    const result = await getData();
+    console.log(result);
+}
+
+showData();`,
+        practice: "Create a Promise that resolves with the message 'Success'.",
+        code: `const result = Promise.resolve("Success");
+
+result.then(message => {
+    console.log(message);
+});`
+    }
+];
+
+/* TOPIC NAVIGATION AND FILTER*/
+
+let currentTopicIndex = 0;
+
+const topicList = document.getElementById("topicList");
+const searchInput = document.getElementById("searchInput");
+const levelFilter = document.getElementById("levelFilter");
+
+let completedTopics = JSON.parse(localStorage.getItem("jsCompletedTopics") || "[]");
+
+function renderTopics() {
+    topicList.innerHTML = "";
+
+    const searchText = searchInput.value.toLowerCase();
+    const selectedLevel = levelFilter.value;
+
+    topics.forEach((topic, index) => {
+        const matchesSearch =
+            topic.title.toLowerCase().includes(searchText) ||
+            topic.description.toLowerCase().includes(searchText);
+
+        const matchesLevel =
+            selectedLevel === "All" || topic.level === selectedLevel;
+
+        if (matchesSearch && matchesLevel) {
+            const button = document.createElement("button");
+            button.className = "topic-item";
+
+            if (index === currentTopicIndex) {
+                button.classList.add("active");
+            }
+
+            const completedMark = completedTopics.includes(index) ? " ✓" : "";
+
+            button.innerHTML = `
+                ${topic.title}${completedMark}
+                <small>${topic.level}</small>
+            `;
+
+            button.addEventListener("click", () => {
+                currentTopicIndex = index;
+                renderTopics();
+                displayTopic();
+            });
+
+            topicList.appendChild(button);
+        }
+    });
+
+    if (!topicList.children.length) {
+        topicList.innerHTML = "<p>No topics found.</p>";
+    }
+}
+
+function displayTopic() {
+    const topic = topics[currentTopicIndex];
+
+    document.getElementById("topicTitle").textContent = topic.title;
+    document.getElementById("topicDescription").textContent = topic.description;
+    document.getElementById("topicLevel").textContent = topic.level;
+    document.getElementById("topicExample").textContent = topic.example;
+    document.getElementById("practiceQuestion").textContent = topic.practice;
+    document.getElementById("codeEditor").value = topic.code;
+
+    const concepts = document.getElementById("topicConcepts");
+    concepts.innerHTML = "";
+
+    topic.concepts.forEach(concept => {
+        const li = document.createElement("li");
+        li.textContent = concept;
+        concepts.appendChild(li);
+    });
+
+    const completeButton = document.getElementById("completeButton");
+
+    if (completedTopics.includes(currentTopicIndex)) {
+        completeButton.textContent = "✓ Completed";
+    } else {
+        completeButton.textContent = "Mark as Completed ✓";
+    }
+}
+
+searchInput.addEventListener("input", renderTopics);
+levelFilter.addEventListener("change", renderTopics);
+
+/* 
+   SAFE CODE RUNNER*/
+
+document.getElementById("runButton").addEventListener("click", () => {
+    const code = document.getElementById("codeEditor").value;
+    const output = document.getElementById("codeOutput");
+
+    output.textContent = "Running...";
+
+    const iframe = document.createElement("iframe");
+    iframe.sandbox = "allow-scripts";
+    iframe.style.display = "none";
+
+    const escapedCode = JSON.stringify(code);
+
+    iframe.srcdoc = `
+        <script>
+        const userCode = ${escapedCode};
+        const sendOutput = (value) => {
+            parent.postMessage({
+                type: "JS_LAB_OUTPUT",
+                value: String(value)
+            }, "*");
+        };
+
+        console.log = (...values) => sendOutput(values.join(" "));
+        console.error = (...values) => sendOutput("Error: " + values.join(" "));
+
+        try {
+            new Function(userCode)();
+        } catch (error) {
+            sendOutput(error.name + ": " + error.message);
+        }
+        <\/script>
+    `;
+
+    window.addEventListener("message", function receiveOutput(event) {
+        if (event.data && event.data.type === "JS_LAB_OUTPUT") {
+            output.textContent = event.data.value;
+        }
+    }, { once: true });
+
+    document.body.appendChild(iframe);
+
+    setTimeout(() => {
+        iframe.remove();
+
+        if (output.textContent === "Running...") {
+            output.textContent = "Code executed. No console output.";
+        }
+    }, 700);
+});
+
+/* COMPLETION AND PROGRESS */
+
+function updateProgress() {
+    const total = topics.length;
+    const completed = completedTopics.length;
+    const percentage = (completed / total) * 100;
+
+    document.getElementById("progressText").textContent =
+        `${completed} / ${total} completed`;
+
+    document.getElementById("progressFill").style.width = percentage + "%";
+
+    localStorage.setItem(
+        "jsCompletedTopics",
+        JSON.stringify(completedTopics)
+    );
+}
+
+document.getElementById("completeButton").addEventListener("click", () => {
+    if (!completedTopics.includes(currentTopicIndex)) {
+        completedTopics.push(currentTopicIndex);
+    } else {
+        completedTopics = completedTopics.filter(
+            index => index !== currentTopicIndex
+        );
+    }
+
+    updateProgress();
+    renderTopics();
+    displayTopic();
+});
+
+/* TAB SWITCHING */
+
+document.querySelectorAll(".tab-btn").forEach(button => {
+    button.addEventListener("click", () => {
+        document.querySelectorAll(".tab-btn").forEach(btn => {
+            btn.classList.remove("active");
+        });
+
+        document.querySelectorAll(".panel").forEach(panel => {
+            panel.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        document.getElementById(button.dataset.panel).classList.add("active");
+    });
+});
+
+/* DARK / LIGHT MODE */
+
+const themeButton = document.getElementById("themeButton");
+
+function setTheme(theme) {
+    document.body.classList.toggle("dark", theme === "dark");
+    themeButton.textContent = theme === "dark" ? "☀ Light" : "☾ Dark";
+    localStorage.setItem("jsLabTheme", theme);
+}
+
+themeButton.addEventListener("click", () => {
+    const isDark = document.body.classList.contains("dark");
+    setTheme(isDark ? "light" : "dark");
+});
+
+setTheme(localStorage.getItem("jsLabTheme") || "light");
+
+/* QUIZ */
+
+const quizQuestions = [
+    {
+        question: "Which keyword is used to declare a variable that can be reassigned?",
+        options: ["const", "let", "static", "final"],
+        answer: 1
+    },
+    {
+        question: "What is the output of typeof 'Hello'?",
+        options: ["number", "boolean", "string", "object"],
+        answer: 2
+    },
+    {
+        question: "Which operator checks both value and data type?",
+        options: ["==", "=", "===", "!="],
+        answer: 2
+    },
+    {
+        question: "Which loop is commonly used when the number of repetitions is known?",
+        options: ["for", "if", "switch", "try"],
+        answer: 0
+    },
+    {
+        question: "Which keyword sends a value back from a function?",
+        options: ["break", "return", "continue", "this"],
+        answer: 1
+    },
+    {
+        question: "What is the first index of an array?",
+        options: ["1", "-1", "0", "2"],
+        answer: 2
+    },
+    {
+        question: "Which method adds an item to the end of an array?",
+        options: ["pop()", "shift()", "push()", "map()"],
+        answer: 2
+    },
+    {
+        question: "Which method selects an HTML element by its ID?",
+        options: ["getElementById()", "getClass()", "selectId()", "findElement()"],
+        answer: 0
+    },
+    {
+        question: "Which method attaches an event handler?",
+        options: ["addEventListener()", "addEvent()", "listen()", "onClickEvent()"],
+        answer: 0
+    },
+    {
+        question: "Which keyword is used with await?",
+        options: ["class", "async", "switch", "static"],
+        answer: 1
+    }
+];
+
+let quizIndex = 0;
+let quizScore = 0;
+let selectedAnswer = null;
+let answerChecked = false;
+
+function showQuestion() {
+    const question = quizQuestions[quizIndex];
+
+    document.getElementById("quizProgress").textContent =
+        `Question ${quizIndex + 1} of ${quizQuestions.length}`;
+
+    document.getElementById("quizQuestion").textContent = question.question;
+    document.getElementById("quizFeedback").textContent = "";
+    document.getElementById("checkAnswerButton").style.display = "inline-block";
+    document.getElementById("nextQuestionButton").style.display = "none";
+    document.getElementById("restartQuizButton").style.display = "none";
+
+    selectedAnswer = null;
+    answerChecked = false;
+
+    const optionsContainer = document.getElementById("quizOptions");
+    optionsContainer.innerHTML = "";
+
+    question.options.forEach((option, index) => {
+        const button = document.createElement("button");
+        button.className = "quiz-option";
+        button.textContent = option;
+
+        button.addEventListener("click", () => {
+            if (answerChecked) return;
+
+            selectedAnswer = index;
+
+            document.querySelectorAll(".quiz-option").forEach(btn => {
+                btn.classList.remove("selected");
+            });
+
+            button.classList.add("selected");
+        });
+
+        optionsContainer.appendChild(button);
+    });
+}
+
+document.getElementById("checkAnswerButton").addEventListener("click", () => {
+    if (selectedAnswer === null) {
+        document.getElementById("quizFeedback").textContent =
+            "Please select an answer first.";
+        return;
+    }
+
+    answerChecked = true;
+
+    const correctAnswer = quizQuestions[quizIndex].answer;
+    const options = document.querySelectorAll(".quiz-option");
+
+    options[correctAnswer].style.borderColor = "#159b68";
+
+    if (selectedAnswer === correctAnswer) {
+        quizScore++;
+        document.getElementById("quizFeedback").textContent = "Correct answer!";
+        document.getElementById("quizFeedback").style.color = "#159b68";
+    } else {
+        document.getElementById("quizFeedback").textContent =
+            "Incorrect. The correct answer is: " +
+            quizQuestions[quizIndex].options[correctAnswer];
+
+        document.getElementById("quizFeedback").style.color = "#d94b4b";
+    }
+
+    document.getElementById("checkAnswerButton").style.display = "none";
+
+    if (quizIndex === quizQuestions.length - 1) {
+        document.getElementById("nextQuestionButton").style.display = "none";
+        document.getElementById("restartQuizButton").style.display = "inline-block";
+        document.getElementById("quizProgress").textContent =
+            `Quiz completed: ${quizScore} / ${quizQuestions.length}`;
+    } else {
+        document.getElementById("nextQuestionButton").style.display = "inline-block";
+    }
+});
+
+document.getElementById("nextQuestionButton").addEventListener("click", () => {
+    quizIndex++;
+    showQuestion();
+});
+
+document.getElementById("restartQuizButton").addEventListener("click", () => {
+    quizIndex = 0;
+    quizScore = 0;
+    showQuestion();
+});
+
+/* MINI PROJECT 1: COUNTER */
+
+let counter = 0;
+
+function updateCounter() {
+    document.getElementById("counterValue").textContent = counter;
+}
+
+document.getElementById("increaseButton").addEventListener("click", () => {
+    counter++;
+    updateCounter();
+});
+
+document.getElementById("decreaseButton").addEventListener("click", () => {
+    counter--;
+    updateCounter();
+});
+
+document.getElementById("resetButton").addEventListener("click", () => {
+    counter = 0;
+    updateCounter();
+});
+
+/*
+   MINI PROJECT 2: CALCULATOR */
+
+document.querySelectorAll("[data-operation]").forEach(button => {
+    button.addEventListener("click", () => {
+        const first = Number(document.getElementById("firstNumber").value);
+        const second = Number(document.getElementById("secondNumber").value);
+        const operation = button.dataset.operation;
+
+        if (
+            document.getElementById("firstNumber").value === "" ||
+            document.getElementById("secondNumber").value === ""
+        ) {
+            document.getElementById("calculatorResult").textContent =
+                "Please enter both numbers.";
+            return;
+        }
+
+        let result;
+
+        if (operation === "add") {
+            result = first + second;
+        } else if (operation === "subtract") {
+            result = first - second;
+        } else if (operation === "multiply") {
+            result = first * second;
+        } else if (operation === "divide") {
+            if (second === 0) {
+                document.getElementById("calculatorResult").textContent =
+                    "Cannot divide by zero.";
+                return;
+            }
+            result = first / second;
+        }
+
+        document.getElementById("calculatorResult").textContent =
+            "Result: " + result;
+    });
+});
+
+/* MINI PROJECT 3: TO-DO LIST */
+
+document.getElementById("addTodoButton").addEventListener("click", addTodo);
+
+document.getElementById("todoInput").addEventListener("keydown", event => {
+    if (event.key === "Enter") {
+        addTodo();
+    }
+});
+
+function addTodo() {
+    const input = document.getElementById("todoInput");
+    const task = input.value.trim();
+
+    if (task === "") {
+        alert("Please enter a task.");
+        return;
+    }
+
+    const li = document.createElement("li");
+    const taskText = document.createElement("span");
+    const deleteButton = document.createElement("button");
+
+    taskText.textContent = task;
+    deleteButton.textContent = "Delete";
+
+    deleteButton.addEventListener("click", () => {
+        li.remove();
+    });
+
+    li.appendChild(taskText);
+    li.appendChild(deleteButton);
+
+    document.getElementById("todoList").appendChild(li);
+    input.value = "";
+}
+
+/* MINI PROJECT 4: CHARACTER COUNTER */
+
+document.getElementById("characterInput").addEventListener("input", event => {
+    const text = event.target.value;
+
+    document.getElementById("characterCount").textContent = text.length;
+
+    const words = text.trim() === "" ? 0 : text.trim().split(/\s+/).length;
+    document.getElementById("wordCount").textContent = words;
+});
+
+  /* INITIALIZE*/
+
+document.getElementById("currentYear").textContent = new Date().getFullYear();
+
+renderTopics();
+displayTopic();
+updateProgress();
+showQuestion();
+</script>
+
+</body>
+</html>
